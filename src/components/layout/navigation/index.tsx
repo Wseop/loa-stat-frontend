@@ -1,5 +1,5 @@
+import { NaviButton } from '@/components/commons/buttons/navi-button';
 import styled from '@emotion/styled';
-import { NaviButton } from '../../buttons/navi-button';
 import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`

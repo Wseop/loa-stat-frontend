@@ -1,4 +1,4 @@
-import Layout from '@/components/commons/layout';
+import Layout from '@/components/layout';
 import { globalStyles } from '@/styles/globalStyles';
 import { Global } from '@emotion/react';
 import type { AppProps } from 'next/app';
