@@ -4,9 +4,12 @@ import { useRouter } from 'next/router';
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100px;
-  padding-top: 10px;
+  height: 50px;
+  border-bottom: 1px solid white;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const menus = ['홈', '캐릭터 통계', '시세', '카던/가토'];

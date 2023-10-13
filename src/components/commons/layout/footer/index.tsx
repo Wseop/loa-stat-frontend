@@ -3,8 +3,10 @@ import styled from '@emotion/styled';
 const Wrapper = styled.div`
   width: 100%;
   height: 50px;
-  bottom: 0;
+  padding-top: 3px;
   position: absolute;
+  bottom: 0;
+  border-top: 1px solid white;
   text-align: center;
 `;
 
