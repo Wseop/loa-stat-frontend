@@ -17,7 +17,6 @@ const Body = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  height: 100%;
 `;
 
 export default function Layout(props: LayoutProps): JSX.Element {
