@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const NaviButton = styled.button`
+export const MenuButton = styled.button`
   width: 120px;
   height: 49px;
   border: 0;

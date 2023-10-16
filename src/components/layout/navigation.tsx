@@ -1,6 +1,6 @@
-import { NaviButton } from '@/components/commons/buttons/navi-button';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/router';
+import { MenuButton } from '../commons/button';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -25,9 +25,9 @@ export default function Navigation(): JSX.Element {
   return (
     <Wrapper>
       {menus.map((v, i) => (
-        <NaviButton key={v} onClick={onClickMovePage(routes[i])}>
+        <MenuButton key={v} onClick={onClickMovePage(routes[i])}>
           {v}
-        </NaviButton>
+        </MenuButton>
       ))}
     </Wrapper>
   );

@@ -1,118 +1,91 @@
-import { NaviButton } from '@/components/commons/buttons/navi-button';
 import styled from '@emotion/styled';
 import { RewardsPresenterProps } from './interfaces/reward.interface';
+import { MenuButton } from '@/components/commons/button';
+import { Board, Row } from '@/components/commons/area';
+import { Span } from '@/components/commons/label';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const CategoryNavi = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const RewardTable = styled.div`
-  display: block;
-  width: 100vh;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  margin-bottom: 30px;
-`;
-
-const RewardRow1 = styled.div`
-  background-color: #323232;
-  width: 100vh;
-  text-align: center;
+const Span1 = styled(Span)`
   font-size: 30px;
-  border-top: 1px inset white;
-`;
-
-const RewardRow2 = styled.div`
   background-color: #3c3c3c;
-  display: flex;
-  width: 100vh;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  border-top: 1px inset white;
 `;
 
-const RewardSpan = styled.div`
-  margin: 5px;
+const Span2 = styled(Span)`
   width: 115px;
-  background-color: #3c3c3c;
-  text-align: center;
   font-size: 25px;
+  background-color: #323232;
 `;
 
 export default function RewardsPresenter(props: RewardsPresenterProps) {
   return (
     <Wrapper>
-      <CategoryNavi>
+      <Row>
         {props.categories.map((v) => (
-          <NaviButton key={v} onClick={props.onClickCategory(v)}>
+          <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
-          </NaviButton>
+          </MenuButton>
         ))}
-      </CategoryNavi>
+      </Row>
       {props.rewards.map((v) => (
-        <RewardTable key={v.level}>
-          <RewardRow1>{v.level}</RewardRow1>
+        <Board key={v.level}>
+          <Row backgroundColor="#3c3c3c">
+            <Span1>{v.level}</Span1>
+          </Row>
           {v.total === 0 ? (
-            <RewardRow2>
-              <RewardSpan>데이터 없음</RewardSpan>
-            </RewardRow2>
+            <Row>
+              <Span2>데이터 없음</Span2>
+            </Row>
           ) : (
             <>
-              <RewardRow2>
+              <Row backgroundColor="#323232">
                 {[
-                  <RewardSpan key={0}>/</RewardSpan>,
+                  <Span2 key={0}>/</Span2>,
                   ...Object.keys(v.reward).map((v, i) => (
-                    <RewardSpan key={i + 1}>{v}</RewardSpan>
+                    <Span2 key={i + 1}>{v}</Span2>
                   )),
                 ]}
-              </RewardRow2>
-              <RewardRow2>
+              </Row>
+              <Row backgroundColor="#323232">
                 {[
-                  <RewardSpan key={0}>최소</RewardSpan>,
+                  <Span2 key={0}>최소</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
-                    <RewardSpan key={i + 1}>
-                      {v[1].min.toLocaleString()}
-                    </RewardSpan>
+                    <Span2 key={i + 1}>{v[1].min.toLocaleString()}</Span2>
                   )),
                 ]}
-              </RewardRow2>
-              <RewardRow2>
+              </Row>
+              <Row backgroundColor="#323232">
                 {[
-                  <RewardSpan key={0}>최대</RewardSpan>,
+                  <Span2 key={0}>최대</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
-                    <RewardSpan key={i + 1}>
-                      {v[1].max.toLocaleString()}
-                    </RewardSpan>
+                    <Span2 key={i + 1}>{v[1].max.toLocaleString()}</Span2>
                   )),
                 ]}
-              </RewardRow2>
-              <RewardRow2>
+              </Row>
+              <Row backgroundColor="#323232">
                 {[
-                  <RewardSpan key={0}>평균</RewardSpan>,
+                  <Span2 key={0}>평균</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
-                    <RewardSpan key={i + 1}>
+                    <Span2 key={i + 1}>
                       {Number(v[1].avg.toFixed(0)).toLocaleString()}
-                    </RewardSpan>
+                    </Span2>
                   )),
                 ]}
-              </RewardRow2>
-              <RewardRow1>
-                {`수익 (거래가능) : ${v.tradableGoldValue.toLocaleString()}`}
-              </RewardRow1>
-              <RewardRow1>
-                {`수익 (전체) : ${v.goldValue.toLocaleString()}`}
-              </RewardRow1>
+              </Row>
+              <Row backgroundColor="#3c3c3c">
+                <Span1>
+                  {`수익 (거래가능) : ${v.tradableGoldValue.toLocaleString()}`}
+                </Span1>
+              </Row>
+              <Row backgroundColor="#3c3c3c">
+                <Span1>{`수익 (전체) : ${v.goldValue.toLocaleString()}`}</Span1>
+              </Row>
             </>
           )}
-        </RewardTable>
+        </Board>
       ))}
     </Wrapper>
   );

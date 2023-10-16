@@ -1,9 +1,8 @@
 import styled from '@emotion/styled';
-import {
-  CharactersPresenterProps,
-  CharactersServer,
-} from './interfaces/characters.interface';
-import { NaviButton } from '@/components/commons/buttons/navi-button';
+import { CharactersPresenterProps } from './interfaces/characters.interface';
+import { MenuButton } from '@/components/commons/button';
+import { Board, Row } from '@/components/commons/area';
+import { Span } from '@/components/commons/label';
 
 const Wrapper = styled.div`
   display: flex;
@@ -18,22 +17,17 @@ const ItemLevelInput = styled.input`
   text-align: center;
 `;
 
-const Row = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Span = styled.span`
+const Span1 = styled(Span)`
   font-size: 30px;
-  margin: 5px;
 `;
 
-const ApplyButton = styled.button`
+const SearchButton = styled.button`
+  width: 100px;
+  height: 30px;
   border: 1px solid white;
   border-radius: 0.5rem;
   color: white;
   font-size: 20px;
-  width: 100px;
   margin: 5px;
   cursor: pointer;
   :hover {
@@ -41,27 +35,19 @@ const ApplyButton = styled.button`
   }
 `;
 
-const Table = styled.div`
-  background-color: #323232;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-  width: 100vh;
-  margin-bottom: 30px;
-`;
-
 export default function CharactersPresenter(props: CharactersPresenterProps) {
   return (
     <Wrapper>
       <Row>
         {props.categories.map((v) => (
-          <NaviButton key={v} onClick={props.onClickCategory(v)}>
+          <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
-          </NaviButton>
+          </MenuButton>
         ))}
       </Row>
       <Row>
         <form onSubmit={props.handleSubmit(props.onClickSearch)}>
-          <Span>아이템 레벨</Span>
+          <Span1>아이템 레벨</Span1>
           <ItemLevelInput
             type="number"
             min={1620}
@@ -69,7 +55,7 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
             defaultValue={1620}
             {...props.register('minItemLevel')}
           />
-          <Span>~</Span>
+          <Span1>~</Span1>
           <ItemLevelInput
             type="number"
             min={1620}
@@ -77,24 +63,14 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
             defaultValue={1655}
             {...props.register('maxItemLevel')}
           />
-          <ApplyButton type="submit">검색</ApplyButton>
+          <SearchButton type="submit">검색</SearchButton>
         </form>
       </Row>
-      <Table>
+      <Board>
         <Row>
-          <Span>{`캐릭터 수 : ${props.characters?.total}`}</Span>
+          <Span1>{`캐릭터 수 : ${props.characters?.total}`}</Span1>
         </Row>
-        {Object.entries((props.characters as CharactersServer).server).map(
-          (v) => (
-            <Row>
-              <Span>{`${v[0]} : ${v[1]} (${(
-                (v[1] / (props.characters as CharactersServer).total) *
-                100
-              ).toFixed(2)}%)`}</Span>
-            </Row>
-          )
-        )}
-      </Table>
+      </Board>
     </Wrapper>
   );
 }

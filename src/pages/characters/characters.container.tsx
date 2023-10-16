@@ -4,7 +4,7 @@ import {
   CharactersServer,
   ItemLevelFilter,
 } from './interfaces/characters.interface';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const categories = ['서버', '직업 각인', '세팅', '스킬'];
@@ -37,6 +37,21 @@ export default function CharactersContainer() {
         });
     }
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.NEXT_PUBLIC_API}/characters/servers?minItemLevel=1620&maxItemLevel=1655`
+      )
+      .then((result) => {
+        setCharacters(result.data);
+      })
+      .catch((error) => {
+        if (error.response) console.log(error.response.status);
+        else if (error.request) console.log(error.request);
+        else console.log(error.message);
+      });
+  }, []);
 
   return (
     <CharactersPresenter
