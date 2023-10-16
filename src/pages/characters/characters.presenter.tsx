@@ -1,8 +1,18 @@
 import styled from '@emotion/styled';
-import { CharactersPresenterProps } from './interfaces/characters.interface';
+import {
+  CharactersClassEngraving,
+  CharactersPresenterProps,
+  CharactersServer,
+  CharactersSetting,
+  CharactersSkill,
+} from './interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Board, Row } from '@/components/commons/area';
+import { Row } from '@/components/commons/area';
 import { Span } from '@/components/commons/label';
+import CharactersServerBoard from './server';
+import CharactersClassEngravingBoard from './class-engraving';
+import CharactersSettingBoard from './setting';
+import CharactersSkillBoard from './skill';
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,13 +31,19 @@ const Span1 = styled(Span)`
   font-size: 30px;
 `;
 
+const ClassEngravingSelect = styled.select`
+  margin: 10px;
+  font-size: 25px;
+  text-align: center;
+`;
+
 const SearchButton = styled.button`
   width: 100px;
   height: 30px;
   border: 1px solid white;
   border-radius: 0.5rem;
   color: white;
-  font-size: 20px;
+  font-size: 25px;
   margin: 5px;
   cursor: pointer;
   :hover {
@@ -45,8 +61,23 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
           </MenuButton>
         ))}
       </Row>
-      <Row>
-        <form onSubmit={props.handleSubmit(props.onClickSearch)}>
+      <form onSubmit={props.handleSubmit(props.onClickSearch)}>
+        {props.selectedCategory === '세팅' ||
+        props.selectedCategory === '스킬' ? (
+          <Row>
+            <Span1>직업 각인 선택</Span1>
+            <ClassEngravingSelect {...props.register('classEngraving')}>
+              {props.classEngravings.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </ClassEngravingSelect>
+          </Row>
+        ) : (
+          <></>
+        )}
+        <Row>
           <Span1>아이템 레벨</Span1>
           <ItemLevelInput
             type="number"
@@ -64,13 +95,31 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
             {...props.register('maxItemLevel')}
           />
           <SearchButton type="submit">검색</SearchButton>
-        </form>
-      </Row>
-      <Board>
-        <Row>
-          <Span1>{`캐릭터 수 : ${props.characters?.total}`}</Span1>
         </Row>
-      </Board>
+      </form>
+      {props.data ? (
+        props.selectedCategory === '서버' ? (
+          <CharactersServerBoard
+            charactersServer={props.data as CharactersServer}
+          />
+        ) : props.selectedCategory === '직업 각인' ? (
+          <CharactersClassEngravingBoard
+            charactersClassEngraving={props.data as CharactersClassEngraving}
+          />
+        ) : props.selectedCategory === '세팅' ? (
+          <CharactersSettingBoard
+            charactersSetting={props.data as CharactersSetting}
+          />
+        ) : props.selectedCategory === '스킬' ? (
+          <CharactersSkillBoard
+            charactersSkill={props.data as CharactersSkill}
+          />
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
     </Wrapper>
   );
 }
