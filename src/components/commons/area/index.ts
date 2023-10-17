@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-interface BoardProps {
+interface AreaProps {
   borderColor?: string;
 }
 
@@ -9,11 +9,11 @@ interface RowProps {
   borderColor?: string;
 }
 
-export const Board = styled.div`
+export const Area = styled.div`
   background-color: #323232;
-  border-top: ${(props: BoardProps) =>
+  border-top: ${(props: AreaProps) =>
     props.borderColor ? `2px solid ${props.borderColor}` : ''};
-  border-bottom: ${(props: BoardProps) =>
+  border-bottom: ${(props: AreaProps) =>
     props.borderColor ? `2px solid ${props.borderColor}` : ''};
   width: 100vh;
   margin: 30px;
@@ -27,4 +27,10 @@ export const Row = styled.div`
     props.borderColor ? `1px inset ${props.borderColor}` : ''};
   background-color: ${(props: RowProps) =>
     props.backgroundColor ? props.backgroundColor : '#282828'};
+`;
+
+export const Col = styled.div`
+  display: block;
+  justify-content: center;
+  align-items: center;
 `;

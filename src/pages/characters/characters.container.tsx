@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form';
 import CharactersPresenter from './characters.presenter';
 import {
+  CharactersData,
   CharactersServer,
   SearchFilter,
 } from './interfaces/characters.interface';
@@ -63,7 +64,7 @@ const classEngravings = [
 
 export default function CharactersContainer() {
   const [category, setCategory] = useState('서버');
-  const [data, setData] = useState<CharactersServer>();
+  const [data, setData] = useState<CharactersData>({});
 
   const { register, handleSubmit } = useForm<SearchFilter>();
 
@@ -82,7 +83,12 @@ export default function CharactersContainer() {
     axios
       .get(url)
       .then((result) => {
-        setData(result.data);
+        const newData: CharactersData = JSON.parse(JSON.stringify(data));
+        if (category === '서버') newData.server = result.data;
+        else if (category === '직업 각인') newData.classEngraving = result.data;
+        else if (category === '세팅') newData.setting = result.data;
+        else if (category === '스킬') newData.skill = result.data;
+        setData(newData);
       })
       .catch((error) => {
         if (error.response) console.log(error.response.status);
@@ -90,21 +96,6 @@ export default function CharactersContainer() {
         else console.log(error.message);
       });
   };
-
-  useEffect(() => {
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_API}/characters/servers?minItemLevel=1620&maxItemLevel=1655`
-      )
-      .then((result) => {
-        setData(result.data);
-      })
-      .catch((error) => {
-        if (error.response) console.log(error.response.status);
-        else if (error.request) console.log(error.request);
-        else console.log(error.message);
-      });
-  }, []);
 
   return (
     <CharactersPresenter

@@ -1,18 +1,14 @@
 import styled from '@emotion/styled';
 import {
-  CharactersClassEngraving,
   CharactersPresenterProps,
-  CharactersServer,
-  CharactersSetting,
-  CharactersSkill,
+  ClassEngravingAreaProps,
+  ServerAreaProps,
+  SettingAreaProps,
+  SkillAreaProps,
 } from './interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Row } from '@/components/commons/area';
-import { Span } from '@/components/commons/label';
-import CharactersServerBoard from './server';
-import CharactersClassEngravingBoard from './class-engraving';
-import CharactersSettingBoard from './setting';
-import CharactersSkillBoard from './skill';
+import { Area, Row } from '@/components/commons/area';
+import { RatioBar, Span } from '@/components/commons/data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +47,84 @@ const SearchButton = styled.button`
     background-color: #3c3c3c;
   }
 `;
+
+function ServerArea(props: ServerAreaProps) {
+  const max = props.charactersServer?.server
+    ? Object.entries(props.charactersServer.server)[0][1]
+    : 0;
+  const total = props.charactersServer?.total
+    ? props.charactersServer.total
+    : 0;
+
+  return (
+    <Area borderColor="#ffdc3c">
+      {props.charactersServer ? (
+        <>
+          <Row borderColor="white">
+            <Span1>{`캐릭터 수 : ${total}`}</Span1>
+          </Row>
+          {props.charactersServer?.server ? (
+            Object.entries(props.charactersServer.server).map((v) => (
+              <Row key={v[0]}>
+                <RatioBar label={v[0]} max={max} total={total} value={v[1]} />
+              </Row>
+            ))
+          ) : (
+            <></>
+          )}
+        </>
+      ) : (
+        <></>
+      )}
+    </Area>
+  );
+}
+
+function ClassEngravingArea(props: ClassEngravingAreaProps) {
+  const max = props.charactersClassEngraving?.classEngraving
+    ? Object.entries(props.charactersClassEngraving.classEngraving)[0][1]
+    : 0;
+  const total = props.charactersClassEngraving?.total
+    ? props.charactersClassEngraving.total
+    : 0;
+
+  return (
+    <Area borderColor="#ffdc3c">
+      {props.charactersClassEngraving ? (
+        <>
+          <Row borderColor="white">
+            <Span1>{`캐릭터 수 : ${total}`}</Span1>
+          </Row>
+          {props.charactersClassEngraving?.classEngraving ? (
+            Object.entries(props.charactersClassEngraving.classEngraving).map(
+              (v) => (
+                <Row key={v[0]}>
+                  <RatioBar label={v[0]} max={max} total={total} value={v[1]} />
+                </Row>
+              )
+            )
+          ) : (
+            <></>
+          )}
+        </>
+      ) : (
+        <></>
+      )}
+    </Area>
+  );
+}
+
+function SettingArea(props: SettingAreaProps) {
+  const total = props.charactersSetting?.total
+    ? props.charactersSetting.total
+    : 0;
+  return <></>;
+}
+
+function SkillArea(props: SkillAreaProps) {
+  const total = props.charactersSkill?.total ? props.charactersSkill.total : 0;
+  return <></>;
+}
 
 export default function CharactersPresenter(props: CharactersPresenterProps) {
   return (
@@ -100,21 +174,15 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
       </form>
       {props.data ? (
         props.selectedCategory === '서버' ? (
-          <CharactersServerBoard
-            charactersServer={props.data as CharactersServer}
-          />
+          <ServerArea charactersServer={props.data.server} />
         ) : props.selectedCategory === '직업 각인' ? (
-          <CharactersClassEngravingBoard
-            charactersClassEngraving={props.data as CharactersClassEngraving}
+          <ClassEngravingArea
+            charactersClassEngraving={props.data.classEngraving}
           />
         ) : props.selectedCategory === '세팅' ? (
-          <CharactersSettingBoard
-            charactersSetting={props.data as CharactersSetting}
-          />
+          <SettingArea charactersSetting={props.data.setting} />
         ) : props.selectedCategory === '스킬' ? (
-          <CharactersSkillBoard
-            charactersSkill={props.data as CharactersSkill}
-          />
+          <SkillArea charactersSkill={props.data.skill} />
         ) : (
           <></>
         )

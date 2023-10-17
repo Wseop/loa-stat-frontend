@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { MarketPricePresenterProps } from './interfaces/market-price.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Board, Row } from '@/components/commons/area';
-import { Span } from '@/components/commons/label';
+import { Area, Row } from '@/components/commons/area';
+import { Span } from '@/components/commons/data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
           </MenuButton>
         ))}
       </Row>
-      <Board borderColor="#ffdc3c">
+      <Area borderColor="#ffdc3c">
         <Row backgroundColor="#323232" borderColor="white">
           <Span1>아이템</Span1>
           {props.category === '재련 재료' ||
@@ -49,7 +49,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
             <Span2>{v.updated}</Span2>
           </Row>
         ))}
-      </Board>
+      </Area>
     </Wrapper>
   );
 }

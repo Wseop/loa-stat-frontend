@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { RewardsPresenterProps } from './interfaces/reward.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Board, Row } from '@/components/commons/area';
-import { Span } from '@/components/commons/label';
+import { Area, Row } from '@/components/commons/area';
+import { Span } from '@/components/commons/data';
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,7 +31,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
         ))}
       </Row>
       {props.rewards.map((v) => (
-        <Board key={v.level} borderColor="#ffdc3c">
+        <Area key={v.level} borderColor="#ffdc3c">
           <Row backgroundColor="#3c3c3c" borderColor="white">
             <Span1>{v.level}</Span1>
           </Row>
@@ -85,7 +85,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               </Row>
             </>
           )}
-        </Board>
+        </Area>
       ))}
     </Wrapper>
   );

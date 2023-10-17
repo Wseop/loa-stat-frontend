@@ -1,11 +1,11 @@
 import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
-type CharactersData =
-  | undefined
-  | CharactersServer
-  | CharactersClassEngraving
-  | CharactersSetting
-  | CharactersSkill;
+export interface CharactersData {
+  server?: CharactersServer;
+  classEngraving?: CharactersClassEngraving;
+  setting?: CharactersSetting;
+  skill?: CharactersSkill;
+}
 
 export interface CharactersPresenterProps {
   categories: string[];
@@ -74,18 +74,18 @@ export interface CharactersSkill {
   };
 }
 
-export interface CharactersServerProps {
-  charactersServer: CharactersServer;
+export interface ServerAreaProps {
+  charactersServer: CharactersServer | undefined;
 }
 
-export interface CharactersClassEngravingProps {
-  charactersClassEngraving: CharactersClassEngraving;
+export interface ClassEngravingAreaProps {
+  charactersClassEngraving: CharactersClassEngraving | undefined;
 }
 
-export interface CharactersSettingProps {
-  charactersSetting: CharactersSetting;
+export interface SettingAreaProps {
+  charactersSetting: CharactersSetting | undefined;
 }
 
-export interface CharactersSkillProps {
-  charactersSkill: CharactersSkill;
+export interface SkillAreaProps {
+  charactersSkill: CharactersSkill | undefined;
 }
