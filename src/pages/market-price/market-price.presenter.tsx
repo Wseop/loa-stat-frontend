@@ -24,17 +24,22 @@ const Span2 = styled(Span)`
 export default function MarketPricePresenter(props: MarketPricePresenterProps) {
   return (
     <Wrapper>
-      <Row>
+      <Row borderColor="white">
         {props.categories.map((v) => (
           <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
           </MenuButton>
         ))}
       </Row>
-      <Board>
-        <Row backgroundColor="#323232">
+      <Board borderColor="#ffdc3c">
+        <Row backgroundColor="#323232" borderColor="white">
           <Span1>아이템</Span1>
-          <Span1>최저가 / 평균 거래가</Span1>
+          {props.category === '재련 재료' ||
+          props.category === '에스더의 기운' ? (
+            <Span1>평균 거래가</Span1>
+          ) : (
+            <Span1>최저가</Span1>
+          )}
           <Span1>갱신일</Span1>
         </Row>
         {props.itemPrices?.map((v) => (

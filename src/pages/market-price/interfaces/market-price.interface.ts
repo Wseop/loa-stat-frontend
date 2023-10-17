@@ -1,5 +1,6 @@
 export interface MarketPricePresenterProps {
   categories: string[];
+  category: string;
   onClickCategory: (category: string) => () => void;
   itemPrices: ItemPrice[];
 }

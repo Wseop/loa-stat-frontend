@@ -45,6 +45,7 @@ const SearchButton = styled.button`
   color: white;
   font-size: 25px;
   margin: 5px;
+  margin-left: 20px;
   cursor: pointer;
   :hover {
     background-color: #3c3c3c;
@@ -54,7 +55,7 @@ const SearchButton = styled.button`
 export default function CharactersPresenter(props: CharactersPresenterProps) {
   return (
     <Wrapper>
-      <Row>
+      <Row borderColor="white">
         {props.categories.map((v) => (
           <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
@@ -77,7 +78,7 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
         ) : (
           <></>
         )}
-        <Row>
+        <Row borderColor="white">
           <Span1>아이템 레벨</Span1>
           <ItemLevelInput
             type="number"

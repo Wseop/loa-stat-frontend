@@ -23,7 +23,7 @@ const Span2 = styled(Span)`
 export default function RewardsPresenter(props: RewardsPresenterProps) {
   return (
     <Wrapper>
-      <Row>
+      <Row borderColor="white">
         {props.categories.map((v) => (
           <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
@@ -31,17 +31,17 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
         ))}
       </Row>
       {props.rewards.map((v) => (
-        <Board key={v.level}>
-          <Row backgroundColor="#3c3c3c">
+        <Board key={v.level} borderColor="#ffdc3c">
+          <Row backgroundColor="#3c3c3c" borderColor="white">
             <Span1>{v.level}</Span1>
           </Row>
           {v.total === 0 ? (
-            <Row>
+            <Row backgroundColor="#323232">
               <Span2>데이터 없음</Span2>
             </Row>
           ) : (
             <>
-              <Row backgroundColor="#323232">
+              <Row backgroundColor="#323232" borderColor="white">
                 {[
                   <Span2 key={0}>/</Span2>,
                   ...Object.keys(v.reward).map((v, i) => (
@@ -49,7 +49,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
                   )),
                 ]}
               </Row>
-              <Row backgroundColor="#323232">
+              <Row backgroundColor="#323232" borderColor="white">
                 {[
                   <Span2 key={0}>최소</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
@@ -57,7 +57,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
                   )),
                 ]}
               </Row>
-              <Row backgroundColor="#323232">
+              <Row backgroundColor="#323232" borderColor="white">
                 {[
                   <Span2 key={0}>최대</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
@@ -65,7 +65,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
                   )),
                 ]}
               </Row>
-              <Row backgroundColor="#323232">
+              <Row backgroundColor="#323232" borderColor="white">
                 {[
                   <Span2 key={0}>평균</Span2>,
                   ...Object.entries(v.reward).map((v, i) => (
@@ -75,7 +75,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
                   )),
                 ]}
               </Row>
-              <Row backgroundColor="#3c3c3c">
+              <Row backgroundColor="#3c3c3c" borderColor="white">
                 <Span1>
                   {`수익 (거래가능) : ${v.tradableGoldValue.toLocaleString()}`}
                 </Span1>
