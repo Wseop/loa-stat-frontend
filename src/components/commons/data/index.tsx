@@ -31,7 +31,7 @@ const Progress = styled.progress`
 
 export function RatioBar(props: RatioBarProps) {
   return (
-    <Row>
+    <Row style={{ marginBottom: '5px' }}>
       <Col>
         <Label style={{ fontSize: '25px' }}>{props.label}</Label>
         <Progress max={props.max} value={props.value}></Progress>
@@ -40,10 +40,10 @@ export function RatioBar(props: RatioBarProps) {
         <Label style={{ fontSize: '20px' }}>
           {props.value.toLocaleString()}
         </Label>
-        <Label style={{ fontSize: '20px' }}>{`${(
+        <Label style={{ fontSize: '20px' }}>{`(${(
           (props.value / props.total) *
           100
-        ).toFixed(2)}%`}</Label>
+        ).toFixed(2)}%)`}</Label>
       </Col>
     </Row>
   );

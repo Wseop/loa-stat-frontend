@@ -1,17 +1,17 @@
 import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
-export interface CharactersData {
-  server?: CharactersServer;
-  classEngraving?: CharactersClassEngraving;
-  setting?: CharactersSetting;
-  skill?: CharactersSkill;
+export interface CharacterData {
+  servers?: ServerAreaProps;
+  classEngravings?: ClassEngravingAreaProps;
+  settings?: SettingAreaProps;
+  skills?: SkillAreaProps;
 }
 
 export interface CharactersPresenterProps {
-  categories: string[];
-  classEngravings: string[];
+  categories: readonly string[];
+  classEngravings: readonly string[];
   selectedCategory: string;
-  data: CharactersData;
+  data: CharacterData;
   register: UseFormRegister<SearchFilter>;
   handleSubmit: UseFormHandleSubmit<SearchFilter, undefined>;
   onClickCategory: (category: string) => () => void;
@@ -24,21 +24,21 @@ export interface SearchFilter {
   classEngraving?: string;
 }
 
-export interface CharactersServer {
+export interface CharacterServers {
   total: number;
   server: {
     [serverName: string]: number;
   };
 }
 
-export interface CharactersClassEngraving {
+export interface CharacterClassEngravings {
   total: number;
   classEngraving: {
     [classEngravingName: string]: number;
   };
 }
 
-export interface CharactersSetting {
+export interface CharacterSettings {
   total: number;
   stat: {
     [statName: string]: number;
@@ -54,7 +54,7 @@ export interface CharactersSetting {
   };
 }
 
-export interface CharactersSkill {
+export interface CharacterSkills {
   total: number;
   skill: {
     [skillName: string]: {
@@ -75,17 +75,43 @@ export interface CharactersSkill {
 }
 
 export interface ServerAreaProps {
-  charactersServer: CharactersServer | undefined;
+  total?: number;
+  servers?: {
+    server: string;
+    count: number;
+  }[];
 }
 
 export interface ClassEngravingAreaProps {
-  charactersClassEngraving: CharactersClassEngraving | undefined;
+  total?: number;
+  classEngravings?: {
+    classEngraving: string;
+    count: number;
+  }[];
 }
 
 export interface SettingAreaProps {
-  charactersSetting: CharactersSetting | undefined;
+  total?: number;
+  stats?: {
+    stat: string;
+    count: number;
+  }[];
+  sets?: {
+    set: string;
+    count: number;
+  }[];
+  elixirs?: {
+    elixir: string;
+    count: number;
+  }[];
+  engravings?: {
+    engraving: string;
+    count: number;
+  }[];
+  engravings97?: {
+    engraving: string;
+    count: number;
+  }[];
 }
 
-export interface SkillAreaProps {
-  charactersSkill: CharactersSkill | undefined;
-}
+export interface SkillAreaProps {}

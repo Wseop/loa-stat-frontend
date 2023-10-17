@@ -7,7 +7,7 @@ import {
   SkillAreaProps,
 } from './interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Area, Row } from '@/components/commons/area';
+import { Area, Col, Row } from '@/components/commons/area';
 import { RatioBar, Span } from '@/components/commons/data';
 
 const Wrapper = styled.div`
@@ -49,80 +49,171 @@ const SearchButton = styled.button`
 `;
 
 function ServerArea(props: ServerAreaProps) {
-  const max = props.charactersServer?.server
-    ? Object.entries(props.charactersServer.server)[0][1]
-    : 0;
-  const total = props.charactersServer?.total
-    ? props.charactersServer.total
-    : 0;
+  const total = props.total ? props.total : 0;
 
   return (
     <Area borderColor="#ffdc3c">
-      {props.charactersServer ? (
-        <>
-          <Row borderColor="white">
-            <Span1>{`캐릭터 수 : ${total}`}</Span1>
-          </Row>
-          {props.charactersServer?.server ? (
-            Object.entries(props.charactersServer.server).map((v) => (
-              <Row key={v[0]}>
-                <RatioBar label={v[0]} max={max} total={total} value={v[1]} />
-              </Row>
-            ))
-          ) : (
-            <></>
-          )}
-        </>
-      ) : (
-        <></>
-      )}
+      <Row borderColor="white">
+        <Span1>{`캐릭터 수 : ${total}`}</Span1>
+      </Row>
+      {props.servers?.map((v, i) => (
+        <Row key={v.server}>
+          <RatioBar
+            label={`${i + 1}. ${v.server}`}
+            max={total}
+            total={total}
+            value={v.count}
+          />
+        </Row>
+      ))}
     </Area>
   );
 }
 
 function ClassEngravingArea(props: ClassEngravingAreaProps) {
-  const max = props.charactersClassEngraving?.classEngraving
-    ? Object.entries(props.charactersClassEngraving.classEngraving)[0][1]
-    : 0;
-  const total = props.charactersClassEngraving?.total
-    ? props.charactersClassEngraving.total
-    : 0;
+  const total = props.total ? props.total : 0;
 
   return (
     <Area borderColor="#ffdc3c">
-      {props.charactersClassEngraving ? (
-        <>
-          <Row borderColor="white">
-            <Span1>{`캐릭터 수 : ${total}`}</Span1>
-          </Row>
-          {props.charactersClassEngraving?.classEngraving ? (
-            Object.entries(props.charactersClassEngraving.classEngraving).map(
-              (v) => (
-                <Row key={v[0]}>
-                  <RatioBar label={v[0]} max={max} total={total} value={v[1]} />
-                </Row>
-              )
-            )
-          ) : (
-            <></>
-          )}
-        </>
-      ) : (
-        <></>
-      )}
+      <Row borderColor="white">
+        <Span1>{`캐릭터 수 : ${total}`}</Span1>
+      </Row>
+      {props.classEngravings?.map((v, i) => (
+        <Row key={v.classEngraving}>
+          <RatioBar
+            label={`${i + 1}. ${v.classEngraving}`}
+            max={total}
+            total={total}
+            value={v.count}
+          />
+        </Row>
+      ))}
     </Area>
   );
 }
 
 function SettingArea(props: SettingAreaProps) {
-  const total = props.charactersSetting?.total
-    ? props.charactersSetting.total
-    : 0;
-  return <></>;
+  const total = props.total ? props.total : 0;
+
+  return (
+    <Area borderColor="#ffdc3c">
+      <Row borderColor="white">
+        <Span1>{`캐릭터 수 : ${total}`}</Span1>
+      </Row>
+      <Row borderColor="white">
+        <Col borderColor="white" style={{ marginRight: '25px' }}>
+          {props.stats ? (
+            <>
+              <Row>
+                <Span1>특성</Span1>
+              </Row>
+              {props.stats.map((v) => (
+                <Row key={v.stat}>
+                  <RatioBar
+                    label={v.stat}
+                    max={total}
+                    total={total}
+                    value={v.count}
+                  />
+                </Row>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Col>
+        <Col borderColor="white" style={{ marginRight: '25px' }}>
+          {props.sets ? (
+            <>
+              <Row>
+                <Span1>세트 효과</Span1>
+              </Row>
+              {props.sets.map((v) => (
+                <Row key={v.set}>
+                  <RatioBar
+                    label={v.set}
+                    max={total}
+                    total={total}
+                    value={v.count}
+                  />
+                </Row>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Col>
+        <Col>
+          {props.elixirs ? (
+            <>
+              <Row>
+                <Span1>엘릭서</Span1>
+              </Row>
+              {props.elixirs.map((v) => (
+                <Row key={v.elixir}>
+                  <RatioBar
+                    label={v.elixir}
+                    max={total}
+                    total={total}
+                    value={v.count}
+                  />
+                </Row>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col borderColor="white" style={{ marginRight: '25px' }}>
+          {props.engravings ? (
+            <>
+              <Row>
+                <Span1>각인</Span1>
+              </Row>
+              {props.engravings.map((v) => (
+                <Row key={v.engraving}>
+                  <RatioBar
+                    label={v.engraving}
+                    max={total}
+                    total={total}
+                    value={v.count}
+                  />
+                </Row>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Col>
+        <Col>
+          {props.engravings97 ? (
+            <>
+              <Row>
+                <Span1>각인 (97돌)</Span1>
+              </Row>
+              {props.engravings97.map((v) => (
+                <Row key={v.engraving}>
+                  <RatioBar
+                    label={v.engraving}
+                    max={total}
+                    total={total}
+                    value={v.count}
+                  />
+                </Row>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
+        </Col>
+      </Row>
+    </Area>
+  );
 }
 
 function SkillArea(props: SkillAreaProps) {
-  const total = props.charactersSkill?.total ? props.charactersSkill.total : 0;
   return <></>;
 }
 
@@ -174,15 +265,13 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
       </form>
       {props.data ? (
         props.selectedCategory === '서버' ? (
-          <ServerArea charactersServer={props.data.server} />
+          <ServerArea {...props.data.servers} />
         ) : props.selectedCategory === '직업 각인' ? (
-          <ClassEngravingArea
-            charactersClassEngraving={props.data.classEngraving}
-          />
+          <ClassEngravingArea {...props.data.classEngravings} />
         ) : props.selectedCategory === '세팅' ? (
-          <SettingArea charactersSetting={props.data.setting} />
+          <SettingArea {...props.data.settings} />
         ) : props.selectedCategory === '스킬' ? (
-          <SkillArea charactersSkill={props.data.skill} />
+          <SkillArea />
         ) : (
           <></>
         )
