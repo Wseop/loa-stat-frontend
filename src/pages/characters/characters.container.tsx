@@ -5,6 +5,7 @@ import {
   CharacterData,
   CharacterServers,
   CharacterSettings,
+  CharacterSkills,
   SearchFilter,
 } from './interfaces/characters.interface';
 import { useState } from 'react';
@@ -159,6 +160,35 @@ export default function CharactersContainer() {
               .slice(0, 5),
           };
         } else if (category === '스킬') {
+          const skills: CharacterSkills = result.data;
+          newData.skills = {
+            total: skills.total,
+            skills: Object.entries(skills.skill).map((v) => ({
+              skillName: v[0],
+              count: v[1].count,
+              levels: Object.entries(v[1].level)
+                .map((v) => ({
+                  level: v[0],
+                  count: v[1],
+                }))
+                .sort((a, b) => b.count - a.count)
+                .slice(0, 5),
+              tripods: Object.entries(v[1].tripod)
+                .map((v) => ({
+                  tripod: v[0],
+                  count: v[1],
+                }))
+                .slice(0, 5),
+              runes: Object.entries(v[1].rune)
+                .map((v) => ({
+                  rune: v[0],
+                  count: v[1],
+                }))
+                .slice(0, 5),
+              myul: v[1].myul,
+              hong: v[1].hong,
+            })),
+          };
         }
         setData(newData);
       })

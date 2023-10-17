@@ -214,7 +214,84 @@ function SettingArea(props: SettingAreaProps) {
 }
 
 function SkillArea(props: SkillAreaProps) {
-  return <></>;
+  const total = props.total ? props.total : 0;
+
+  return (
+    <Area borderColor="#ffdc3c">
+      <Row borderColor="white">
+        <Span1>{`캐릭터 수 : ${total}`}</Span1>
+      </Row>
+      {props.skills?.map((v, i) => (
+        <>
+          <Row>
+            <Span1>{`${i + 1}. ${v.skillName} (${(
+              (v.count / total) *
+              100
+            ).toFixed(2)}%)`}</Span1>
+          </Row>
+          <Row>
+            <Col
+              borderColor="white"
+              style={{ marginRight: '25px', width: '33%', height: '400px' }}
+            >
+              <Row>
+                <Span1>스킬 레벨</Span1>
+              </Row>
+              {v.levels.map((v2) => (
+                <Row>
+                  <RatioBar
+                    label={v2.level}
+                    max={v.count}
+                    total={v.count}
+                    value={v2.count}
+                  />
+                </Row>
+              ))}
+            </Col>
+            <Col
+              borderColor="white"
+              style={{ marginRight: '25px', width: '33%', height: '400px' }}
+            >
+              <Row>
+                <Span1>트라이포드</Span1>
+              </Row>
+              {v.tripods.map((v2) => (
+                <Row>
+                  <RatioBar
+                    label={v2.tripod}
+                    max={v.count}
+                    total={v.count}
+                    value={v2.count}
+                  />
+                </Row>
+              ))}
+            </Col>
+            <Col style={{ width: '33%', height: '400px' }}>
+              <Row>
+                <Span1>룬</Span1>
+              </Row>
+              {v.runes.map((v2) => (
+                <Row>
+                  <RatioBar
+                    label={v2.rune}
+                    max={v.count}
+                    total={v.count}
+                    value={v2.count}
+                  />
+                </Row>
+              ))}
+            </Col>
+          </Row>
+          <Row borderColor="white">
+            <Span1>{`멸화 (${((v.myul / v.count) * 100).toFixed(2)}%)`}</Span1>
+            <Span1>{`, 홍염 (${((v.hong / v.count) * 100).toFixed(
+              2
+            )}%)`}</Span1>
+          </Row>
+        </>
+      ))}
+    </Area>
+  );
 }
 
 export default function CharactersPresenter(props: CharactersPresenterProps) {
@@ -271,7 +348,7 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
         ) : props.selectedCategory === '세팅' ? (
           <SettingArea {...props.data.settings} />
         ) : props.selectedCategory === '스킬' ? (
-          <SkillArea />
+          <SkillArea {...props.data.skills} />
         ) : (
           <></>
         )

@@ -114,4 +114,24 @@ export interface SettingAreaProps {
   }[];
 }
 
-export interface SkillAreaProps {}
+export interface SkillAreaProps {
+  total?: number;
+  skills?: {
+    skillName: string;
+    count: number;
+    levels: {
+      level: string;
+      count: number;
+    }[];
+    tripods: {
+      tripod: string;
+      count: number;
+    }[];
+    runes: {
+      rune: string;
+      count: number;
+    }[];
+    myul: number;
+    hong: number;
+  }[];
+}
