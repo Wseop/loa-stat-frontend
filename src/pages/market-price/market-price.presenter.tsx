@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { MarketPricePresenterProps } from './interfaces/market-price.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Area, Row } from '@/components/commons/area';
 import { Span } from '@/components/commons/data';
+import { Row } from '@/components/commons/table';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,40 +11,38 @@ const Wrapper = styled.div`
 
 const Span1 = styled(Span)`
   width: 33%;
-  background-color: #323232;
   font-size: 30px;
 `;
 
 const Span2 = styled(Span)`
   width: 30%;
-  background-color: #3c3c3c;
   font-size: 25px;
 `;
 
 export default function MarketPricePresenter(props: MarketPricePresenterProps) {
   return (
     <Wrapper>
-      <Row borderColor="white">
+      <Row>
         {props.categories.map((v) => (
           <MenuButton key={v} onClick={props.onClickCategory(v)}>
             {v}
           </MenuButton>
         ))}
       </Row>
-      <Area borderColor="#ffdc3c">
-        <Row backgroundColor="#323232" borderColor="white">
+      <Row>
+        <Row>
           <Span1>아이템</Span1>
           <Span1>최저가</Span1>
           <Span1>갱신일</Span1>
         </Row>
         {props.itemPrices?.map((v) => (
-          <Row key={v.itemName} backgroundColor="#3c3c3c">
+          <Row key={v.itemName}>
             <Span2>{v.itemName}</Span2>
             <Span2>{v.price.toLocaleString()}</Span2>
             <Span2>{v.updated}</Span2>
           </Row>
         ))}
-      </Area>
+      </Row>
     </Wrapper>
   );
 }

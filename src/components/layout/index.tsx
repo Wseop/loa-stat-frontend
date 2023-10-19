@@ -7,14 +7,12 @@ interface LayoutProps {
 }
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: block;
+  text-align: center;
 `;
 
 const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: inline-block;
 `;
 
 export default function Layout(props: LayoutProps): JSX.Element {

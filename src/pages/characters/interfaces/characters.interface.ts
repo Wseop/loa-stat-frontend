@@ -1,10 +1,10 @@
 import { UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 export interface CharacterData {
-  servers?: ServerAreaProps;
-  classEngravings?: ClassEngravingAreaProps;
-  settings?: SettingAreaProps;
-  skills?: SkillAreaProps;
+  servers?: ServerTableProps;
+  classEngravings?: ClassEngravingTableProps;
+  settings?: SettingTableProps;
+  skills?: SkillTableProps;
 }
 
 export interface CharactersPresenterProps {
@@ -74,7 +74,7 @@ export interface CharacterSkills {
   };
 }
 
-export interface ServerAreaProps {
+export interface ServerTableProps {
   total?: number;
   servers?: {
     server: string;
@@ -82,15 +82,23 @@ export interface ServerAreaProps {
   }[];
 }
 
-export interface ClassEngravingAreaProps {
+export interface ClassEngravingTableProps {
   total?: number;
   classEngravings?: {
     classEngraving: string;
     count: number;
   }[];
+  classes?: {
+    className: string;
+    count: number;
+    classEngravings: {
+      classEngraving: string;
+      count: number;
+    }[];
+  }[];
 }
 
-export interface SettingAreaProps {
+export interface SettingTableProps {
   total?: number;
   stats?: {
     stat: string;
@@ -114,7 +122,7 @@ export interface SettingAreaProps {
   }[];
 }
 
-export interface SkillAreaProps {
+export interface SkillTableProps {
   total?: number;
   skills?: {
     skillName: string;

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Col, Row } from '../area';
+import { Col, Row } from '../table';
 
 export const Span = styled.span`
   margin: 5px;

@@ -1,18 +1,19 @@
 import styled from '@emotion/styled';
 import {
   CharactersPresenterProps,
-  ClassEngravingAreaProps,
-  ServerAreaProps,
-  SettingAreaProps,
-  SkillAreaProps,
+  ClassEngravingTableProps,
+  ServerTableProps,
+  SettingTableProps,
+  SkillTableProps,
 } from './interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Area, Col, Row } from '@/components/commons/area';
-import { RatioBar, Span } from '@/components/commons/data';
+import { Label, RatioBar, Span } from '@/components/commons/data';
+import { Col, Row, Table, TableItem } from '@/components/commons/table';
+import { useState } from 'react';
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: block;
+  width: 75vw;
 `;
 
 const ItemLevelInput = styled.input`
@@ -48,60 +49,133 @@ const SearchButton = styled.button`
   }
 `;
 
-function ServerArea(props: ServerAreaProps) {
+function ServerTable(props: ServerTableProps) {
   const total = props.total ? props.total : 0;
 
   return (
-    <Area borderColor="#ffdc3c">
-      <Row borderColor="white">
-        <Span1>{`캐릭터 수 : ${total}`}</Span1>
-      </Row>
-      {props.servers?.map((v, i) => (
-        <Row key={v.server}>
-          <RatioBar
-            label={`${i + 1}. ${v.server}`}
-            max={total}
-            total={total}
-            value={v.count}
-          />
+    <Wrapper>
+      {total ? (
+        <Row borderColor={{ bottom: 'white' }}>
+          <Span1>{`캐릭터 수 : ${total.toLocaleString()}`}</Span1>
         </Row>
-      ))}
-    </Area>
+      ) : (
+        <></>
+      )}
+      <Table>
+        {props.servers?.map((v, i) => (
+          <TableItem key={v.server}>
+            <RatioBar
+              key={v.server}
+              label={`${i + 1}. ${v.server}`}
+              max={total}
+              total={total}
+              value={v.count}
+            />
+          </TableItem>
+        ))}
+      </Table>
+    </Wrapper>
   );
 }
 
-function ClassEngravingArea(props: ClassEngravingAreaProps) {
+function ClassEngravingTable(props: ClassEngravingTableProps) {
+  const types = ['직업별', '직업각인별'];
   const total = props.total ? props.total : 0;
+  const [type, setType] = useState<number>(0);
+
+  const onClickType = (type: number) => () => {
+    setType(type);
+  };
 
   return (
-    <Area borderColor="#ffdc3c">
-      <Row borderColor="white">
-        <Span1>{`캐릭터 수 : ${total}`}</Span1>
-      </Row>
-      {props.classEngravings?.map((v, i) => (
-        <Row key={v.classEngraving}>
-          <RatioBar
-            label={`${i + 1}. ${v.classEngraving}`}
-            max={total}
-            total={total}
-            value={v.count}
-          />
-        </Row>
-      ))}
-    </Area>
+    <Wrapper>
+      {total ? (
+        <>
+          <Row backgroundColor="#323232">
+            {types.map((v, i) => (
+              <MenuButton
+                key={v}
+                onClick={onClickType(i)}
+                backgroundColor={type === i ? '#464646' : '#323232'}
+              >
+                {v}
+              </MenuButton>
+            ))}
+          </Row>
+          <Row borderColor={{ bottom: 'white' }}>
+            <Span1>{`캐릭터 수 : ${total.toLocaleString()}`}</Span1>
+          </Row>
+
+          {type === 1 ? (
+            <>
+              <Table>
+                {props.classEngravings?.map((v, i) => (
+                  <TableItem key={v.classEngraving}>
+                    <RatioBar
+                      label={`${i + 1}. ${v.classEngraving}`}
+                      max={total}
+                      total={total}
+                      value={v.count}
+                    />
+                  </TableItem>
+                ))}
+              </Table>
+            </>
+          ) : (
+            <>
+              {props.classes?.map((v, i) => (
+                <Row key={v.className} borderColor={{ bottom: 'white' }}>
+                  <Row>
+                    <Col
+                      borderColor={{ right: 'white' }}
+                      style={{ marginRight: '10px' }}
+                    >
+                      <RatioBar
+                        label={`${i + 1}. ${v.className}`}
+                        max={total}
+                        total={total}
+                        value={v.count}
+                      />
+                    </Col>
+                  </Row>
+                  <Row>
+                    {v.classEngravings.map((v2) => (
+                      <Col style={{ marginRight: '20px' }}>
+                        <RatioBar
+                          label={v2.classEngraving}
+                          max={v.count}
+                          total={v.count}
+                          value={v2.count}
+                        />
+                      </Col>
+                    ))}
+                  </Row>
+                </Row>
+              ))}
+            </>
+          )}
+        </>
+      ) : (
+        <></>
+      )}
+    </Wrapper>
   );
 }
 
-function SettingArea(props: SettingAreaProps) {
+function SettingTable(props: SettingTableProps) {
   const total = props.total ? props.total : 0;
 
   return (
-    <Area borderColor="#ffdc3c">
-      <Row borderColor="white">
-        <Span1>{`캐릭터 수 : ${total}`}</Span1>
-      </Row>
-      <Row borderColor="white">
-        <Col borderColor="white" style={{ marginRight: '25px' }}>
+    <Wrapper>
+      {total ? (
+        <Row borderColor={{ bottom: 'white' }}>
+          <Span1>{`캐릭터 수 : ${total}`}</Span1>
+        </Row>
+      ) : (
+        <></>
+      )}
+      <Row borderColor={{ bottom: 'white' }}>
+        <Col borderColor={{ right: 'white' }} style={{ marginRight: '25px' }}>
           {props.stats ? (
             <>
               <Row>
@@ -122,7 +196,7 @@ function SettingArea(props: SettingAreaProps) {
             <></>
           )}
         </Col>
-        <Col borderColor="white" style={{ marginRight: '25px' }}>
+        <Col borderColor={{ right: 'white' }} style={{ marginRight: '25px' }}>
           {props.sets ? (
             <>
               <Row>
@@ -166,7 +240,7 @@ function SettingArea(props: SettingAreaProps) {
         </Col>
       </Row>
       <Row>
-        <Col borderColor="white" style={{ marginRight: '25px' }}>
+        <Col borderColor={{ right: 'white' }} style={{ marginRight: '25px' }}>
           {props.engravings ? (
             <>
               <Row>
@@ -209,146 +283,176 @@ function SettingArea(props: SettingAreaProps) {
           )}
         </Col>
       </Row>
-    </Area>
+    </Wrapper>
   );
 }
 
-function SkillArea(props: SkillAreaProps) {
+function SkillTable(props: SkillTableProps) {
   const total = props.total ? props.total : 0;
 
   return (
-    <Area borderColor="#ffdc3c">
-      <Row borderColor="white">
-        <Span1>{`캐릭터 수 : ${total}`}</Span1>
-      </Row>
+    <Wrapper>
+      {total ? (
+        <Row borderColor={{ bottom: 'white' }}>
+          <Span1>{`캐릭터 수 : ${total}`}</Span1>
+        </Row>
+      ) : (
+        <></>
+      )}
       {props.skills?.map((v, i) => (
-        <>
-          <Row>
-            <Span1>{`${i + 1}. ${v.skillName} (${(
-              (v.count / total) *
-              100
-            ).toFixed(2)}%)`}</Span1>
-          </Row>
-          <Row>
-            <Col
-              borderColor="white"
-              style={{ marginRight: '25px', width: '33%', height: '400px' }}
-            >
+        <Row borderColor={{ bottom: 'white' }}>
+          <Col style={{ width: '20%' }}>
+            <RatioBar
+              label={`${i + 1}. ${v.skillName}`}
+              max={total}
+              total={total}
+              value={v.count}
+            />
+          </Col>
+          <Col
+            borderColor={{ left: 'white', right: 'white' }}
+            style={{ width: '20%', height: '400px' }}
+          >
+            <Row>
+              <Span1>스킬 레벨</Span1>
+            </Row>
+            {v.levels.map((v2) => (
               <Row>
-                <Span1>스킬 레벨</Span1>
+                <RatioBar
+                  label={v2.level}
+                  max={v.count}
+                  total={v.count}
+                  value={v2.count}
+                />
               </Row>
-              {v.levels.map((v2) => (
-                <Row>
-                  <RatioBar
-                    label={v2.level}
-                    max={v.count}
-                    total={v.count}
-                    value={v2.count}
-                  />
-                </Row>
-              ))}
-            </Col>
-            <Col
-              borderColor="white"
-              style={{ marginRight: '25px', width: '33%', height: '400px' }}
-            >
+            ))}
+          </Col>
+          <Col
+            borderColor={{ right: 'white' }}
+            style={{ width: '20%', height: '400px' }}
+          >
+            <Row>
+              <Span1>트라이포드</Span1>
+            </Row>
+            {v.tripods.map((v2) => (
               <Row>
-                <Span1>트라이포드</Span1>
+                <RatioBar
+                  label={v2.tripod}
+                  max={v.count}
+                  total={v.count}
+                  value={v2.count}
+                />
               </Row>
-              {v.tripods.map((v2) => (
-                <Row>
-                  <RatioBar
-                    label={v2.tripod}
-                    max={v.count}
-                    total={v.count}
-                    value={v2.count}
-                  />
-                </Row>
-              ))}
-            </Col>
-            <Col style={{ width: '33%', height: '400px' }}>
+            ))}
+          </Col>
+          <Col
+            borderColor={{ right: 'white' }}
+            style={{ width: '20%', height: '400px' }}
+          >
+            <Row>
+              <Span1>룬</Span1>
+            </Row>
+            {v.runes.map((v2) => (
               <Row>
-                <Span1>룬</Span1>
+                <RatioBar
+                  label={v2.rune}
+                  max={v.count}
+                  total={v.count}
+                  value={v2.count}
+                />
               </Row>
-              {v.runes.map((v2) => (
-                <Row>
-                  <RatioBar
-                    label={v2.rune}
-                    max={v.count}
-                    total={v.count}
-                    value={v2.count}
-                  />
-                </Row>
-              ))}
-            </Col>
-          </Row>
-          <Row borderColor="white">
-            <Span1>{`멸화 (${((v.myul / v.count) * 100).toFixed(2)}%)`}</Span1>
-            <Span1>{`, 홍염 (${((v.hong / v.count) * 100).toFixed(
-              2
-            )}%)`}</Span1>
-          </Row>
-        </>
+            ))}
+          </Col>
+          <Col style={{ width: '20%', height: '400px' }}>
+            <Row>
+              <Span1>보석</Span1>
+            </Row>
+            <Row>
+              <RatioBar
+                label="멸화"
+                max={v.count}
+                total={v.count}
+                value={v.myul}
+              />
+            </Row>
+            <Row>
+              <RatioBar
+                label="홍염"
+                max={v.count}
+                total={v.count}
+                value={v.hong}
+              />
+            </Row>
+          </Col>
+        </Row>
       ))}
-    </Area>
+    </Wrapper>
   );
 }
 
 export default function CharactersPresenter(props: CharactersPresenterProps) {
   return (
     <Wrapper>
-      <Row borderColor="white">
+      <Row backgroundColor="#323232">
         {props.categories.map((v) => (
-          <MenuButton key={v} onClick={props.onClickCategory(v)}>
+          <MenuButton
+            key={v}
+            backgroundColor={
+              props.selectedCategory === v ? '#464646' : '#323232'
+            }
+            onClick={props.onClickCategory(v)}
+          >
             {v}
           </MenuButton>
         ))}
       </Row>
-      <form onSubmit={props.handleSubmit(props.onClickSearch)}>
-        {props.selectedCategory === '세팅' ||
-        props.selectedCategory === '스킬' ? (
+      <Row borderColor={{ bottom: 'white' }}>
+        <form onSubmit={props.handleSubmit(props.onClickSearch)}>
+          {props.selectedCategory === '세팅' ||
+          props.selectedCategory === '스킬' ? (
+            <Row>
+              <Span1>직업 각인 선택</Span1>
+              <ClassEngravingSelect {...props.register('classEngraving')}>
+                {props.classEngravings.map((v) => (
+                  <option key={v} value={v}>
+                    {v}
+                  </option>
+                ))}
+              </ClassEngravingSelect>
+            </Row>
+          ) : (
+            <></>
+          )}
           <Row>
-            <Span1>직업 각인 선택</Span1>
-            <ClassEngravingSelect {...props.register('classEngraving')}>
-              {props.classEngravings.map((v) => (
-                <option key={v} value={v}>
-                  {v}
-                </option>
-              ))}
-            </ClassEngravingSelect>
+            <Span1>아이템 레벨</Span1>
+            <ItemLevelInput
+              type="number"
+              min={1620}
+              max={1655}
+              defaultValue={1620}
+              {...props.register('minItemLevel')}
+            />
+            <Span1>~</Span1>
+            <ItemLevelInput
+              type="number"
+              min={1620}
+              max={1655}
+              defaultValue={1655}
+              {...props.register('maxItemLevel')}
+            />
+            <SearchButton type="submit">검색</SearchButton>
           </Row>
-        ) : (
-          <></>
-        )}
-        <Row borderColor="white">
-          <Span1>아이템 레벨</Span1>
-          <ItemLevelInput
-            type="number"
-            min={1620}
-            max={1655}
-            defaultValue={1620}
-            {...props.register('minItemLevel')}
-          />
-          <Span1>~</Span1>
-          <ItemLevelInput
-            type="number"
-            min={1620}
-            max={1655}
-            defaultValue={1655}
-            {...props.register('maxItemLevel')}
-          />
-          <SearchButton type="submit">검색</SearchButton>
-        </Row>
-      </form>
+        </form>
+      </Row>
       {props.data ? (
         props.selectedCategory === '서버' ? (
-          <ServerArea {...props.data.servers} />
-        ) : props.selectedCategory === '직업 각인' ? (
-          <ClassEngravingArea {...props.data.classEngravings} />
+          <ServerTable {...props.data.servers} />
+        ) : props.selectedCategory === '직업' ? (
+          <ClassEngravingTable {...props.data.classEngravings} />
         ) : props.selectedCategory === '세팅' ? (
-          <SettingArea {...props.data.settings} />
+          <SettingTable {...props.data.settings} />
         ) : props.selectedCategory === '스킬' ? (
-          <SkillArea {...props.data.skills} />
+          <SkillTable {...props.data.skills} />
         ) : (
           <></>
         )
