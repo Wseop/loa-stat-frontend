@@ -7,7 +7,7 @@ import {
   SkillTableProps,
 } from './interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
-import { Label, RatioBar, Span } from '@/components/commons/data';
+import { RatioBar, Span } from '@/components/commons/data';
 import { Col, Row, Table, TableItem } from '@/components/commons/table';
 import { useState } from 'react';
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MarketPricePresenter from './market-price.presenter';
 import { ItemPrice } from './interfaces/market-price.interface';
 import axios from 'axios';
@@ -23,6 +23,19 @@ export default function MarketPriceContainer() {
         else console.log(error.message);
       });
   };
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_API}/marketprice/재련 재료`)
+      .then((result) => {
+        setMarketPrice(result.data);
+      })
+      .catch((error) => {
+        if (error.response) console.log(error.response.status);
+        else if (error.request) console.log(error.request);
+        else console.log(error.message);
+      });
+  }, []);
 
   return (
     <MarketPricePresenter
