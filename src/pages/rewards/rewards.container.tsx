@@ -9,6 +9,7 @@ export default function RewardsContainer() {
   const [rewardsChaos, setRewardsChaos] = useState<Reward[]>([]);
   const [rewardsGuardian, setRewardsGuardian] = useState<Reward[]>([]);
   const [targetRewards, setTargetRewards] = useState<Reward[]>([]);
+  const [category, setCategory] = useState<string>(categories[0]);
 
   const onClickCategory = (category: string) => () => {
     if (category === '카오스던전') {
@@ -16,6 +17,7 @@ export default function RewardsContainer() {
     } else if (category === '가디언토벌') {
       setTargetRewards(rewardsGuardian);
     }
+    setCategory(category);
   };
 
   // reward data 초기화
@@ -43,6 +45,7 @@ export default function RewardsContainer() {
   return (
     <RewardsPresenter
       categories={categories}
+      category={category}
       onClickCategory={onClickCategory}
       rewards={targetRewards}
     />

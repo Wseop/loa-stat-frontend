@@ -14,6 +14,7 @@ export interface Reward {
 
 export interface RewardsPresenterProps {
   categories: string[];
+  category: string;
   onClickCategory: (category: string) => () => void;
   rewards: Reward[];
 }
