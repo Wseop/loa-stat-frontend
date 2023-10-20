@@ -70,7 +70,7 @@ export default function NoticesPresenter(props: NoticesPresenterProps) {
             로스트아크 공지
           </Span>
         </Row>
-        {props.notices.map((v) => (
+        {props.notices?.map((v) => (
           <NoticeLink
             key={v.noticeId}
             link={v.link}

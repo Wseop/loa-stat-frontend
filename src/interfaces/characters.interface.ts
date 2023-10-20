@@ -12,8 +12,6 @@ export interface CharactersPresenterProps {
   classEngravings: readonly string[];
   selectedCategory: string;
   data: CharacterData;
-  register: UseFormRegister<SearchFilter>;
-  handleSubmit: UseFormHandleSubmit<SearchFilter, undefined>;
   onClickCategory: (category: string) => () => void;
   onClickSearch: (filter: SearchFilter) => void;
 }

@@ -24,7 +24,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
   return (
     <Wrapper>
       <Row backgroundColor="#323232">
-        {props.categories.map((v) => (
+        {props.categories?.map((v) => (
           <MenuButton
             key={v}
             onClick={props.onClickCategory(v)}

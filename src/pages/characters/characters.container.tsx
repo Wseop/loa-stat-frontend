@@ -1,4 +1,3 @@
-import { useForm } from 'react-hook-form';
 import CharactersPresenter from './characters.presenter';
 import {
   CharacterClassEngravings,
@@ -70,8 +69,6 @@ const CLASS_ENGRAVING_MAP: {
 export default function CharactersContainer() {
   const [category, setCategory] = useState<string>('서버');
   const [data, setData] = useState<CharacterData>({});
-
-  const { register, handleSubmit } = useForm<SearchFilter>();
 
   const onClickCategory = (category: string) => () => {
     setCategory(category);
@@ -235,8 +232,6 @@ export default function CharactersContainer() {
       classEngravings={Object.keys(CLASS_ENGRAVING_MAP)}
       selectedCategory={category}
       data={data}
-      register={register}
-      handleSubmit={handleSubmit}
       onClickCategory={onClickCategory}
       onClickSearch={onClickSearch}
     />

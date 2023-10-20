@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import {
   CharactersPresenterProps,
   ClassEngravingTableProps,
+  SearchFilter,
   ServerTableProps,
   SettingTableProps,
   SkillTableProps,
@@ -10,6 +11,7 @@ import { MenuButton } from '@/components/commons/button';
 import { RatioBar, Span } from '@/components/commons/data';
 import { Col, Row, Table, TableItem } from '@/components/commons/table';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 const Wrapper = styled.div`
   display: block;
@@ -139,7 +141,7 @@ function ClassEngravingTable(props: ClassEngravingTableProps) {
                     </Col>
                   </Row>
                   <Row>
-                    {v.classEngravings.map((v2) => (
+                    {v.classEngravings?.map((v2) => (
                       <Col
                         key={v2.classEngraving}
                         style={{ marginRight: '20px' }}
@@ -184,7 +186,7 @@ function SettingTable(props: SettingTableProps) {
               <Row>
                 <Span1>특성</Span1>
               </Row>
-              {props.stats.map((v) => (
+              {props.stats?.map((v) => (
                 <Row key={v.stat}>
                   <RatioBar
                     label={v.stat}
@@ -205,7 +207,7 @@ function SettingTable(props: SettingTableProps) {
               <Row>
                 <Span1>세트 효과</Span1>
               </Row>
-              {props.sets.map((v) => (
+              {props.sets?.map((v) => (
                 <Row key={v.set}>
                   <RatioBar
                     label={v.set}
@@ -226,7 +228,7 @@ function SettingTable(props: SettingTableProps) {
               <Row>
                 <Span1>엘릭서</Span1>
               </Row>
-              {props.elixirs.map((v) => (
+              {props.elixirs?.map((v) => (
                 <Row key={v.elixir}>
                   <RatioBar
                     label={v.elixir}
@@ -249,7 +251,7 @@ function SettingTable(props: SettingTableProps) {
               <Row>
                 <Span1>각인</Span1>
               </Row>
-              {props.engravings.map((v) => (
+              {props.engravings?.map((v) => (
                 <Row key={v.engraving}>
                   <RatioBar
                     label={v.engraving}
@@ -270,7 +272,7 @@ function SettingTable(props: SettingTableProps) {
               <Row>
                 <Span1>각인 (97돌)</Span1>
               </Row>
-              {props.engravings97.map((v) => (
+              {props.engravings97?.map((v) => (
                 <Row key={v.engraving}>
                   <RatioBar
                     label={v.engraving}
@@ -319,7 +321,7 @@ function SkillTable(props: SkillTableProps) {
             <Row>
               <Span1>스킬 레벨</Span1>
             </Row>
-            {v.levels.map((v2) => (
+            {v.levels?.map((v2) => (
               <Row key={v2.level}>
                 <RatioBar
                   label={v2.level}
@@ -337,7 +339,7 @@ function SkillTable(props: SkillTableProps) {
             <Row>
               <Span1>트라이포드</Span1>
             </Row>
-            {v.tripods.map((v2) => (
+            {v.tripods?.map((v2) => (
               <Row key={v2.tripod}>
                 <RatioBar
                   label={v2.tripod}
@@ -355,7 +357,7 @@ function SkillTable(props: SkillTableProps) {
             <Row>
               <Span1>룬</Span1>
             </Row>
-            {v.runes.map((v2) => (
+            {v.runes?.map((v2) => (
               <Row key={v2.rune}>
                 <RatioBar
                   label={v2.rune}
@@ -394,10 +396,12 @@ function SkillTable(props: SkillTableProps) {
 }
 
 export default function CharactersPresenter(props: CharactersPresenterProps) {
+  const { register, handleSubmit } = useForm<SearchFilter>();
+
   return (
     <Wrapper>
       <Row backgroundColor="#323232">
-        {props.categories.map((v) => (
+        {props.categories?.map((v) => (
           <MenuButton
             key={v}
             backgroundColor={
@@ -410,13 +414,13 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
         ))}
       </Row>
       <Row borderColor={{ bottom: 'white' }}>
-        <form onSubmit={props.handleSubmit(props.onClickSearch)}>
+        <form onSubmit={handleSubmit(props.onClickSearch)}>
           {props.selectedCategory === '세팅' ||
           props.selectedCategory === '스킬' ? (
             <Row>
               <Span1>직업 각인 선택</Span1>
-              <ClassEngravingSelect {...props.register('classEngraving')}>
-                {props.classEngravings.map((v) => (
+              <ClassEngravingSelect {...register('classEngraving')}>
+                {props.classEngravings?.map((v) => (
                   <option key={v} value={v}>
                     {v}
                   </option>
@@ -433,7 +437,7 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
               min={1620}
               max={1655}
               defaultValue={1620}
-              {...props.register('minItemLevel')}
+              {...register('minItemLevel')}
             />
             <Span1>~</Span1>
             <ItemLevelInput
@@ -441,7 +445,7 @@ export default function CharactersPresenter(props: CharactersPresenterProps) {
               min={1620}
               max={1655}
               defaultValue={1655}
-              {...props.register('maxItemLevel')}
+              {...register('maxItemLevel')}
             />
             <SearchButton type="submit">검색</SearchButton>
           </Row>

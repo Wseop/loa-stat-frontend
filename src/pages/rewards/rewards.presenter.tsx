@@ -23,7 +23,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
   return (
     <Wrapper>
       <Row backgroundColor="#323232">
-        {props.categories.map((v) => (
+        {props.categories?.map((v) => (
           <MenuButton
             key={v}
             onClick={props.onClickCategory(v)}
@@ -33,7 +33,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
           </MenuButton>
         ))}
       </Row>
-      {props.rewards.map((v) => (
+      {props.rewards?.map((v) => (
         <Fragment key={v.level}>
           <Row
             borderColor={{ top: 'white' }}
@@ -51,7 +51,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               <Row>
                 {[
                   <Span2 key={0}>/</Span2>,
-                  ...Object.keys(v.reward).map((v, i) => (
+                  ...Object.keys(v.reward)?.map((v, i) => (
                     <Span2 key={i + 1}>{v}</Span2>
                   )),
                 ]}
@@ -59,7 +59,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               <Row>
                 {[
                   <Span2 key={0}>최소</Span2>,
-                  ...Object.entries(v.reward).map((v, i) => (
+                  ...Object.entries(v.reward)?.map((v, i) => (
                     <Span2 key={i + 1}>{v[1].min.toLocaleString()}</Span2>
                   )),
                 ]}
@@ -67,7 +67,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               <Row>
                 {[
                   <Span2 key={0}>최대</Span2>,
-                  ...Object.entries(v.reward).map((v, i) => (
+                  ...Object.entries(v.reward)?.map((v, i) => (
                     <Span2 key={i + 1}>{v[1].max.toLocaleString()}</Span2>
                   )),
                 ]}
@@ -75,7 +75,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               <Row>
                 {[
                   <Span2 key={0}>평균</Span2>,
-                  ...Object.entries(v.reward).map((v, i) => (
+                  ...Object.entries(v.reward)?.map((v, i) => (
                     <Span2 key={i + 1}>
                       {Number(v[1].avg.toFixed(0)).toLocaleString()}
                     </Span2>
