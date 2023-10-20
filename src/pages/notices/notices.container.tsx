@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import NoticesPresenter from './notices.presenter';
-import { Notice } from './interfaces/notices.interface';
+import { Notice } from '../../interfaces/notices.interface';
 import axios from 'axios';
 
 const MAX_NOTICE = 10;

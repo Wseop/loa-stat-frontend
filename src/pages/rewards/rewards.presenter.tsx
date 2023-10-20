@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { RewardsPresenterProps } from './interfaces/reward.interface';
+import { RewardsPresenterProps } from '../../interfaces/reward.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Row } from '@/components/commons/table';

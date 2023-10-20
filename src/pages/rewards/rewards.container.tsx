@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import RewardsPresenter from './rewards.presenter';
-import { Reward } from './interfaces/reward.interface';
+import { Reward } from '../../interfaces/reward.interface';
 
 const categories = ['카오스던전', '가디언토벌'];
 

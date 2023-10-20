@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import MarketPricePresenter from './market-price.presenter';
-import { ItemPrice } from './interfaces/market-price.interface';
+import { ItemPrice } from '../../interfaces/market-price.interface';
 import axios from 'axios';
 
 const categories = ['재련 재료', '보석', '각인서', '에스더의 기운'];

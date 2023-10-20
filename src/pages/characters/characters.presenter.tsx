@@ -5,7 +5,7 @@ import {
   ServerTableProps,
   SettingTableProps,
   SkillTableProps,
-} from './interfaces/characters.interface';
+} from '../../interfaces/characters.interface';
 import { MenuButton } from '@/components/commons/button';
 import { RatioBar, Span } from '@/components/commons/data';
 import { Col, Row, Table, TableItem } from '@/components/commons/table';

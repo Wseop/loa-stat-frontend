@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { MarketPricePresenterProps } from './interfaces/market-price.interface';
+import { MarketPricePresenterProps } from '../../interfaces/market-price.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Row, Table, TableItem } from '@/components/commons/table';

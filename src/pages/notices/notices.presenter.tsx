@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import {
   NoticeLinkProps,
   NoticesPresenterProps,
-} from './interfaces/notices.interface';
+} from '../../interfaces/notices.interface';
 import { Col, Row } from '@/components/commons/table';
 import { Span } from '@/components/commons/data';
 

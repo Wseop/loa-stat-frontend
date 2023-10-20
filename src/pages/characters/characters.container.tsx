@@ -7,7 +7,7 @@ import {
   CharacterSettings,
   CharacterSkills,
   SearchFilter,
-} from './interfaces/characters.interface';
+} from '../../interfaces/characters.interface';
 import { useState } from 'react';
 import axios from 'axios';
 
