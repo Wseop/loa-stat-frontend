@@ -1,3 +1,5 @@
+import NoticesPage from './notices';
+
 export default function HomePage(): JSX.Element {
-  return <div>HOME</div>;
+  return <NoticesPage />;
 }
