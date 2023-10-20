@@ -3,6 +3,7 @@ import { RewardsPresenterProps } from './interfaces/reward.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Row } from '@/components/commons/table';
+import { Fragment } from 'react';
 
 const Wrapper = styled.div`
   display: block;
@@ -33,7 +34,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
         ))}
       </Row>
       {props.rewards.map((v) => (
-        <>
+        <Fragment key={v.level}>
           <Row
             borderColor={{ top: 'white' }}
             backgroundColor="#323232"
@@ -93,7 +94,7 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
               </Row>
             </>
           )}
-        </>
+        </Fragment>
       ))}
     </Wrapper>
   );

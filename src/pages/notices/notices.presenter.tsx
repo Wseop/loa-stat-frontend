@@ -71,7 +71,12 @@ export default function NoticesPresenter(props: NoticesPresenterProps) {
           </Span>
         </Row>
         {props.notices.map((v) => (
-          <NoticeLink link={v.link} title={v.title} date={v.date} />
+          <NoticeLink
+            key={v.noticeId}
+            link={v.link}
+            title={v.title}
+            date={v.date}
+          />
         ))}
       </NoticeBoard>
     </Wrapper>

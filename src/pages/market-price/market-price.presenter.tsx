@@ -3,6 +3,7 @@ import { MarketPricePresenterProps } from './interfaces/market-price.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Row, Table, TableItem } from '@/components/commons/table';
+import { Fragment } from 'react';
 
 const Wrapper = styled.div`
   display: block;
@@ -44,7 +45,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
           <Span1>갱신일</Span1>
         </TableItem>
         {props.itemPrices?.map((v) => (
-          <>
+          <Fragment key={v.itemName}>
             <TableItem>
               <Span2>{v.itemName}</Span2>
             </TableItem>
@@ -54,7 +55,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
             <TableItem>
               <Span2>{v.updated}</Span2>
             </TableItem>
-          </>
+          </Fragment>
         ))}
       </Table>
     </Wrapper>

@@ -140,7 +140,10 @@ function ClassEngravingTable(props: ClassEngravingTableProps) {
                   </Row>
                   <Row>
                     {v.classEngravings.map((v2) => (
-                      <Col style={{ marginRight: '20px' }}>
+                      <Col
+                        key={v2.classEngraving}
+                        style={{ marginRight: '20px' }}
+                      >
                         <RatioBar
                           label={v2.classEngraving}
                           max={v.count}
@@ -300,7 +303,7 @@ function SkillTable(props: SkillTableProps) {
         <></>
       )}
       {props.skills?.map((v, i) => (
-        <Row borderColor={{ bottom: 'white' }}>
+        <Row key={v.skillName} borderColor={{ bottom: 'white' }}>
           <Col style={{ width: '20%' }}>
             <RatioBar
               label={`${i + 1}. ${v.skillName}`}
@@ -317,7 +320,7 @@ function SkillTable(props: SkillTableProps) {
               <Span1>스킬 레벨</Span1>
             </Row>
             {v.levels.map((v2) => (
-              <Row>
+              <Row key={v2.level}>
                 <RatioBar
                   label={v2.level}
                   max={v.count}
@@ -335,7 +338,7 @@ function SkillTable(props: SkillTableProps) {
               <Span1>트라이포드</Span1>
             </Row>
             {v.tripods.map((v2) => (
-              <Row>
+              <Row key={v2.tripod}>
                 <RatioBar
                   label={v2.tripod}
                   max={v.count}
@@ -353,7 +356,7 @@ function SkillTable(props: SkillTableProps) {
               <Span1>룬</Span1>
             </Row>
             {v.runes.map((v2) => (
-              <Row>
+              <Row key={v2.rune}>
                 <RatioBar
                   label={v2.rune}
                   max={v.count}
