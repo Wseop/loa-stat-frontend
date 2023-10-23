@@ -4,6 +4,12 @@ import { Notice } from '../../interfaces/notices.interface';
 import axios from 'axios';
 
 const MAX_NOTICE = 10;
+const PAGE_NOTICES = [
+  '[캐릭터 통계] 밸런스 패치 이전의 캐릭터 정보가 섞여있을 수 있습니다.',
+  '[캐릭터 통계] 밸런스 패치 직후에는 신뢰도가 떨어질 수 있습니다.',
+  '[카던/가토] 휴식 게이지가 적용되지 않은 일일 수확량 기준으로 표기됩니다.',
+  '[카던/가토] 수익은 시세 페이지의 실시간 최저가를 기준으로 계산됩니다.',
+];
 
 export default function NoticesContainer() {
   const [notices, setNotices] = useState<Notice[]>([]);
@@ -21,5 +27,5 @@ export default function NoticesContainer() {
       });
   }, []);
 
-  return <NoticesPresenter notices={notices} />;
+  return <NoticesPresenter notices={notices} pageNotices={PAGE_NOTICES} />;
 }

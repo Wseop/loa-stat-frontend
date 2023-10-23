@@ -17,7 +17,7 @@ const NoticeBoard = styled.div`
   display: inline-block;
   background-color: #323232;
   border-radius: 1rem;
-  width: 35vw;
+  width: 25vw;
 `;
 
 const NoticeLink = (props: NoticeLinkProps) => {
@@ -29,7 +29,7 @@ const NoticeLink = (props: NoticeLinkProps) => {
       backgroundColor="#323232"
       style={{ margin: '10px', paddingBottom: '10px' }}
     >
-      <Col>
+      <Col backgroundColor="#323232">
         <a
           href={props.link}
           target="_blank"
@@ -57,28 +57,57 @@ const NoticeLink = (props: NoticeLinkProps) => {
   );
 };
 
+const NoticeSpan = styled.span`
+  font-size: 20px;
+  background-color: #323232;
+  margin: 10px;
+`;
+
 export default function NoticesPresenter(props: NoticesPresenterProps) {
   return (
     <Wrapper>
-      <NoticeBoard>
-        <Row
-          borderColor={{ bottom: 'white' }}
-          backgroundColor="#323232"
-          style={{ margin: '10px' }}
-        >
-          <Span style={{ fontSize: '30px', backgroundColor: '#323232' }}>
-            로스트아크 공지
-          </Span>
-        </Row>
-        {props.notices?.map((v) => (
-          <NoticeLink
-            key={v.noticeId}
-            link={v.link}
-            title={v.title}
-            date={v.date}
-          />
-        ))}
-      </NoticeBoard>
+      <Row>
+        <NoticeBoard>
+          <Row
+            borderColor={{ bottom: 'white' }}
+            backgroundColor="#323232"
+            style={{ margin: '10px' }}
+          >
+            <Span style={{ fontSize: '30px', backgroundColor: '#323232' }}>
+              로스트아크 공지
+            </Span>
+          </Row>
+          {props.notices?.map((v) => (
+            <NoticeLink
+              key={v.noticeId}
+              link={v.link}
+              title={v.title}
+              date={v.date}
+            />
+          ))}
+        </NoticeBoard>
+        <NoticeBoard>
+          <Row
+            borderColor={{ bottom: 'white' }}
+            backgroundColor="#323232"
+            style={{ margin: '10px' }}
+          >
+            <Span style={{ fontSize: '30px', backgroundColor: '#323232' }}>
+              주의사항
+            </Span>
+          </Row>
+          {props.pageNotices?.map((v) => (
+            <Row
+              key={v}
+              backgroundColor="#323232"
+              borderColor={{ bottom: 'white' }}
+              style={{ margin: '10px' }}
+            >
+              <NoticeSpan>{`${v}`}</NoticeSpan>
+            </Row>
+          ))}
+        </NoticeBoard>
+      </Row>
     </Wrapper>
   );
 }
