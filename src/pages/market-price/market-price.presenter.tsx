@@ -2,28 +2,22 @@ import styled from '@emotion/styled';
 import { MarketPricePresenterProps } from '../../interfaces/market-price.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
-import { Row, Table, TableItem } from '@/components/commons/table';
-import { Fragment } from 'react';
+import { Board, Row } from '@/components/commons/board';
+
+const TITLE_FONT_SIZE = '30px';
+const CONTENT_FONT_SIZE = '25px';
+
+const SPAN_WIDTH = '30%';
 
 const Wrapper = styled.div`
   display: block;
-  width: 50vw;
-`;
-
-const Span1 = styled(Span)`
-  width: 33%;
-  font-size: 30px;
-`;
-
-const Span2 = styled(Span)`
-  width: 30%;
-  font-size: 25px;
+  width: 75vw;
 `;
 
 export default function MarketPricePresenter(props: MarketPricePresenterProps) {
   return (
     <Wrapper>
-      <Row backgroundColor="#323232">
+      <Row justifyContent="center">
         {props.categories?.map((v) => (
           <MenuButton
             key={v}
@@ -34,30 +28,32 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
           </MenuButton>
         ))}
       </Row>
-      <Table>
-        <TableItem>
-          <Span1>아이템</Span1>
-        </TableItem>
-        <TableItem>
-          <Span1>최저가</Span1>
-        </TableItem>
-        <TableItem>
-          <Span1>갱신일</Span1>
-        </TableItem>
+      <Board>
+        <Row justifyContent="center" borderColor={{ bottom: 'white' }}>
+          <Span fontSize={TITLE_FONT_SIZE} width={SPAN_WIDTH}>
+            아이템
+          </Span>
+          <Span fontSize={TITLE_FONT_SIZE} width={SPAN_WIDTH}>
+            최저가
+          </Span>
+          <Span fontSize={TITLE_FONT_SIZE} width={SPAN_WIDTH}>
+            갱신일
+          </Span>
+        </Row>
         {props.itemPrices?.map((v) => (
-          <Fragment key={v.itemName}>
-            <TableItem>
-              <Span2>{v.itemName}</Span2>
-            </TableItem>
-            <TableItem>
-              <Span2>{v.price.toLocaleString()}</Span2>
-            </TableItem>
-            <TableItem>
-              <Span2>{v.updated}</Span2>
-            </TableItem>
-          </Fragment>
+          <Row key={v.itemName} justifyContent="center">
+            <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+              {v.itemName}
+            </Span>
+            <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+              {v.price.toLocaleString()}
+            </Span>
+            <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+              {v.updated}
+            </Span>
+          </Row>
         ))}
-      </Table>
+      </Board>
     </Wrapper>
   );
 }

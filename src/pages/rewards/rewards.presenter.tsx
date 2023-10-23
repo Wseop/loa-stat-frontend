@@ -2,27 +2,22 @@ import styled from '@emotion/styled';
 import { RewardsPresenterProps } from '../../interfaces/reward.interface';
 import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
-import { Row } from '@/components/commons/table';
-import { Fragment } from 'react';
+import { Board, Row } from '@/components/commons/board';
+
+const TITLE_FONT_SIZE = '30px';
+const CONTENT_FONT_SIZE = '25px';
+
+const SPAN_WIDTH = '115px';
 
 const Wrapper = styled.div`
   display: block;
   width: 75vw;
 `;
 
-const Span1 = styled(Span)`
-  font-size: 30px;
-`;
-
-const Span2 = styled(Span)`
-  width: 115px;
-  font-size: 25px;
-`;
-
 export default function RewardsPresenter(props: RewardsPresenterProps) {
   return (
     <Wrapper>
-      <Row backgroundColor="#323232">
+      <Row justifyContent="center">
         {props.categories?.map((v) => (
           <MenuButton
             key={v}
@@ -34,67 +29,93 @@ export default function RewardsPresenter(props: RewardsPresenterProps) {
         ))}
       </Row>
       {props.rewards?.map((v) => (
-        <Fragment key={v.level}>
-          <Row
-            borderColor={{ top: 'white' }}
-            backgroundColor="#323232"
-            style={{ marginTop: '30px' }}
-          >
-            <Span1 style={{ backgroundColor: '#323232' }}>{v.level}</Span1>
+        <Board key={v.level}>
+          <Row borderColor={{ bottom: 'white' }} justifyContent="center">
+            <Span fontSize={TITLE_FONT_SIZE}>{v.level}</Span>
           </Row>
           {v.total === 0 ? (
-            <Row borderColor={{ bottom: 'white' }}>
-              <Span2>데이터 없음</Span2>
+            <Row justifyContent="center">
+              <Span fontSize={CONTENT_FONT_SIZE}>데이터 없음</Span>
             </Row>
           ) : (
             <>
-              <Row>
+              <Row justifyContent="center" borderColor={{ bottom: 'white' }}>
                 {[
-                  <Span2 key={0}>/</Span2>,
+                  <Span key={0} fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+                    /
+                  </Span>,
                   ...Object.keys(v.reward)?.map((v, i) => (
-                    <Span2 key={i + 1}>{v}</Span2>
+                    <Span
+                      key={i + 1}
+                      fontSize={CONTENT_FONT_SIZE}
+                      width={SPAN_WIDTH}
+                    >
+                      {v}
+                    </Span>
                   )),
                 ]}
               </Row>
-              <Row>
+              <Row justifyContent="center">
                 {[
-                  <Span2 key={0}>최소</Span2>,
+                  <Span key={0} fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+                    최소
+                  </Span>,
                   ...Object.entries(v.reward)?.map((v, i) => (
-                    <Span2 key={i + 1}>{v[1].min.toLocaleString()}</Span2>
+                    <Span
+                      key={i + 1}
+                      fontSize={CONTENT_FONT_SIZE}
+                      width={SPAN_WIDTH}
+                    >
+                      {v[1].min.toLocaleString()}
+                    </Span>
                   )),
                 ]}
               </Row>
-              <Row>
+              <Row justifyContent="center">
                 {[
-                  <Span2 key={0}>최대</Span2>,
+                  <Span key={0} fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+                    최대
+                  </Span>,
                   ...Object.entries(v.reward)?.map((v, i) => (
-                    <Span2 key={i + 1}>{v[1].max.toLocaleString()}</Span2>
+                    <Span
+                      key={i + 1}
+                      fontSize={CONTENT_FONT_SIZE}
+                      width={SPAN_WIDTH}
+                    >
+                      {v[1].max.toLocaleString()}
+                    </Span>
                   )),
                 ]}
               </Row>
-              <Row>
+              <Row justifyContent="center" borderColor={{ bottom: 'white' }}>
                 {[
-                  <Span2 key={0}>평균</Span2>,
+                  <Span key={0} fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+                    평균
+                  </Span>,
                   ...Object.entries(v.reward)?.map((v, i) => (
-                    <Span2 key={i + 1}>
+                    <Span
+                      key={i + 1}
+                      fontSize={CONTENT_FONT_SIZE}
+                      width={SPAN_WIDTH}
+                    >
                       {Number(v[1].avg.toFixed(0)).toLocaleString()}
-                    </Span2>
+                    </Span>
                   )),
                 ]}
               </Row>
-              <Row backgroundColor="#3c3c3c">
-                <Span1 style={{ backgroundColor: '#3c3c3c' }}>
+              <Row justifyContent="center">
+                <Span fontSize={CONTENT_FONT_SIZE}>
                   {`수익 (거래가능) : ${v.tradableGoldValue.toLocaleString()}`}
-                </Span1>
+                </Span>
               </Row>
-              <Row borderColor={{ bottom: 'white' }} backgroundColor="#323232">
-                <Span1
-                  style={{ backgroundColor: '#323232' }}
-                >{`수익 (전체) : ${v.goldValue.toLocaleString()}`}</Span1>
+              <Row justifyContent="center">
+                <Span
+                  fontSize={CONTENT_FONT_SIZE}
+                >{`수익 (전체) : ${v.goldValue.toLocaleString()}`}</Span>
               </Row>
             </>
           )}
-        </Fragment>
+        </Board>
       ))}
     </Wrapper>
   );

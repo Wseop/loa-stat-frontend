@@ -146,13 +146,13 @@ export default function CharactersContainer() {
             total: settings.total,
             stats: Object.entries(settings.stat)
               .map((v) => ({ stat: v[0], count: v[1] }))
-              .slice(0, 3),
+              .slice(0, 10),
             sets: Object.entries(settings.set)
               .map((v) => ({ set: v[0], count: v[1] }))
-              .slice(0, 3),
+              .slice(0, 10),
             elixirs: Object.entries(settings.elixir)
               .map((v) => ({ elixir: v[0], count: v[1] }))
-              .slice(0, 3),
+              .slice(0, 10),
             engravings: Object.entries(settings.engraving)
               .map((v) => {
                 if (!v[0].includes('[333332]')) {
@@ -199,19 +199,19 @@ export default function CharactersContainer() {
                   count: v[1],
                 }))
                 .sort((a, b) => b.count - a.count)
-                .slice(0, 5),
+                .slice(0, 3),
               tripods: Object.entries(v[1].tripod)
                 .map((v) => ({
                   tripod: v[0],
                   count: v[1],
                 }))
-                .slice(0, 5),
+                .slice(0, 8),
               runes: Object.entries(v[1].rune)
                 .map((v) => ({
                   rune: v[0],
                   count: v[1],
                 }))
-                .slice(0, 5),
+                .slice(0, 8),
               myul: v[1].myul,
               hong: v[1].hong,
             })),
