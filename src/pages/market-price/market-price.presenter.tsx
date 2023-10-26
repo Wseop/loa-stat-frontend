@@ -43,7 +43,7 @@ const CLASSES = [
 
 const Wrapper = styled.div`
   display: block;
-  width: 75vw;
+  width: 1440px;
 `;
 
 const ClassSelect = styled.select`

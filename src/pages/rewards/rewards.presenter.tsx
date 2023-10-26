@@ -11,7 +11,7 @@ const SPAN_WIDTH = '115px';
 
 const Wrapper = styled.div`
   display: block;
-  width: 75vw;
+  width: 1440px;
 `;
 
 export default function RewardsPresenter(props: RewardsPresenterProps) {

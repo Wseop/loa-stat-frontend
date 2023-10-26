@@ -19,7 +19,7 @@ const BG_COLOR_MAIN = '#282828';
 
 const Wrapper = styled.div`
   display: block;
-  width: 75vw;
+  width: 1440px;
 `;
 
 const ItemLevelInput = styled.input`

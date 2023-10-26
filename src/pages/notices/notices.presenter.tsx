@@ -8,7 +8,7 @@ const CONTENT_FONT_SIZE = '20px';
 
 const Wrapper = styled.div`
   display: block;
-  width: 75vw;
+  width: 1440px;
 `;
 
 const SpanLink = styled.a`

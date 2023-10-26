@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { MenuButton } from '../commons/button';
 
 const Wrapper = styled.div`
-  width: 100%;
   height: 50px;
   border-bottom: 1px solid white;
   text-align: center;

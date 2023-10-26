@@ -7,6 +7,7 @@ interface LayoutProps {
 }
 
 const Wrapper = styled.div`
+  width: 1920px;
   display: block;
   text-align: center;
 `;
