@@ -24,16 +24,6 @@ export default function NoticesPresenter(props: NoticesPresenterProps) {
       <Row backgroundColor="#282828" justifyContent="center">
         <Board>
           <Row borderColor={{ bottom: 'white' }}>
-            <Span fontSize={NOTICE_FONT_SIZE}>공지</Span>
-          </Row>
-          {props.pageNotices?.map((v) => (
-            <Row key={v} borderColor={{ bottom: 'white' }}>
-              <Span fontSize={CONTENT_FONT_SIZE} newLine={true}>{`${v}`}</Span>
-            </Row>
-          ))}
-        </Board>
-        <Board>
-          <Row borderColor={{ bottom: 'white' }}>
             <Span fontSize={NOTICE_FONT_SIZE}>로스트아크 공지</Span>
           </Row>
           {props.notices?.map((v) => (

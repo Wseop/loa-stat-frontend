@@ -1,6 +1,5 @@
 export interface NoticesPresenterProps {
   notices: Notice[];
-  pageNotices: string[];
 }
 
 export interface Notice {
