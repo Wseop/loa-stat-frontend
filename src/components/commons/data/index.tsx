@@ -40,16 +40,16 @@ export function RatioBar(props: RatioBarProps) {
   return (
     <Row backgroundColor="#323232">
       <Col>
-        <Span fontSize="25px" newLine={true}>
+        <Span fontSize="15px" newLine={true}>
           {props.label}
         </Span>
         <Progress max={props.max} value={props.value}></Progress>
       </Col>
-      <Col style={{ width: '100px' }}>
-        <Span fontSize="20px" newLine={true}>
+      <Col style={{ width: '110px' }}>
+        <Span fontSize="15px" newLine={true}>
           {props.value.toLocaleString()}
         </Span>
-        <Span fontSize="20px" newLine={true}>{`(${(
+        <Span fontSize="15px" newLine={true}>{`(${(
           (props.value / props.total) *
           100
         ).toFixed(2)}%)`}</Span>

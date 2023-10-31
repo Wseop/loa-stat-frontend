@@ -12,6 +12,6 @@ export const globalStyles = css`
 
   @font-face {
     font-family: 'main-font';
-    src: url('/fonts/SeguSegu-Regular.ttf');
+    src: url('/fonts/NanumSquareNeo-bRg.ttf');
   }
 `;

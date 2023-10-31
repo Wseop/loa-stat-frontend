@@ -3,8 +3,8 @@ import { NoticesPresenterProps } from '../../interfaces/notices.interface';
 import { Span } from '@/components/commons/data';
 import { Board, Row } from '@/components/commons/board';
 
-const NOTICE_FONT_SIZE = '30px';
-const CONTENT_FONT_SIZE = '20px';
+const NOTICE_FONT_SIZE = '20px';
+const CONTENT_FONT_SIZE = '15px';
 
 const Wrapper = styled.div`
   display: block;

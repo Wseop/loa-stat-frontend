@@ -8,7 +8,7 @@ export const MenuButton = styled.button`
   width: 120px;
   height: 49px;
   border: 0;
-  font-size: 30px;
+  font-size: 20px;
   background-color: ${(props: MenuButtonProps) =>
     props.backgroundColor ? props.backgroundColor : ''};
   cursor: pointer;

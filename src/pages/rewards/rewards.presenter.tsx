@@ -4,10 +4,10 @@ import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Board, Row } from '@/components/commons/board';
 
-const TITLE_FONT_SIZE = '30px';
-const CONTENT_FONT_SIZE = '25px';
+const TITLE_FONT_SIZE = '20px';
+const CONTENT_FONT_SIZE = '15px';
 
-const SPAN_WIDTH = '115px';
+const SPAN_WIDTH = '105px';
 
 const Wrapper = styled.div`
   display: block;

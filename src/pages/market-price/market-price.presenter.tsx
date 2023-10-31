@@ -8,8 +8,8 @@ import { Span } from '@/components/commons/data';
 import { Board, Row } from '@/components/commons/board';
 import { useForm } from 'react-hook-form';
 
-const TITLE_FONT_SIZE = '30px';
-const CONTENT_FONT_SIZE = '25px';
+const TITLE_FONT_SIZE = '20px';
+const CONTENT_FONT_SIZE = '15px';
 
 const SPAN_WIDTH = '30%';
 
@@ -48,7 +48,7 @@ const Wrapper = styled.div`
 
 const ClassSelect = styled.select`
   margin: 10px;
-  font-size: 25px;
+  font-size: 20px;
   text-align: center;
 `;
 
@@ -58,7 +58,7 @@ const SearchButton = styled.button`
   border: 1px solid white;
   border-radius: 0.5rem;
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   margin: 5px;
   margin-left: 20px;
   cursor: pointer;
