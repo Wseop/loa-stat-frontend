@@ -7,6 +7,7 @@ import { MenuButton } from '@/components/commons/button';
 import { Span } from '@/components/commons/data';
 import { Board, Row } from '@/components/commons/board';
 import { useForm } from 'react-hook-form';
+import { ItemGradeColor } from '@/styles/color';
 
 const TITLE_FONT_SIZE = '20px';
 const CONTENT_FONT_SIZE = '15px';
@@ -143,7 +144,11 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
                 alignItems="center"
                 borderColor={{ bottom: 'white' }}
               >
-                <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
+                <Span
+                  fontSize={CONTENT_FONT_SIZE}
+                  color={ItemGradeColor[v.itemGrade]}
+                  width={SPAN_WIDTH}
+                >
                   {v.itemName}
                 </Span>
                 <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>

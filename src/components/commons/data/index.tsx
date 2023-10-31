@@ -3,6 +3,7 @@ import { Col, Row } from '../board';
 
 interface SpanProps {
   fontSize?: string;
+  color?: string;
   backgroundColor?: string;
   newLine?: boolean;
   width?: string;
@@ -13,6 +14,7 @@ export const Span = styled.span`
   text-align: center;
   display: ${(props: SpanProps) => (props.newLine ? 'block' : '')};
   font-size: ${(props: SpanProps) => (props.fontSize ? props.fontSize : '')};
+  color: ${(props: SpanProps) => (props.color ? props.color : '')};
   background-color: ${(props: SpanProps) =>
     props.backgroundColor ? props.backgroundColor : '#323232'};
   width: ${(props: SpanProps) => (props.width ? props.width : '')};
