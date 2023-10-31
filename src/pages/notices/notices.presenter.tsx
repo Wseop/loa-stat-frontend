@@ -5,6 +5,7 @@ import { Board, Row } from '@/components/commons/board';
 
 const NOTICE_FONT_SIZE = '20px';
 const CONTENT_FONT_SIZE = '15px';
+const SUB_CONTENT_FONT_SIZE = '10px';
 
 const Wrapper = styled.div`
   display: block;
@@ -31,6 +32,13 @@ export default function NoticesPresenter(props: NoticesPresenterProps) {
               <SpanLink href={v.link} target="_blank">
                 {v.title}
               </SpanLink>
+              <Span
+                fontSize={SUB_CONTENT_FONT_SIZE}
+                color="#dcdcdc"
+                style={{ paddingTop: '5px' }}
+              >
+                {v.date}
+              </Span>
             </Row>
           ))}
         </Board>
