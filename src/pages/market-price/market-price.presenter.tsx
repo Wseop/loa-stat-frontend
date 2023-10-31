@@ -106,6 +106,7 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
       )}
       <Board>
         <Row justifyContent="center" borderColor={{ bottom: 'white' }}>
+          <Span width="50px"></Span>
           <Span fontSize={TITLE_FONT_SIZE} width={SPAN_WIDTH}>
             아이템
           </Span>
@@ -124,6 +125,16 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
                 alignItems="center"
                 borderColor={{ bottom: 'white' }}
               >
+                {v.iconPath ? (
+                  <img
+                    src={v.iconPath}
+                    width="50"
+                    height="50"
+                    style={{ backgroundColor: '#323232', margin: '10px' }}
+                  />
+                ) : (
+                  <Span width="50px"></Span>
+                )}
                 <Span fontSize={CONTENT_FONT_SIZE} width={SPAN_WIDTH}>
                   {`[${v.skillName}]`}
                   <br />
@@ -144,6 +155,16 @@ export default function MarketPricePresenter(props: MarketPricePresenterProps) {
                 alignItems="center"
                 borderColor={{ bottom: 'white' }}
               >
+                {v.iconPath ? (
+                  <img
+                    src={v.iconPath}
+                    width="50"
+                    height="50"
+                    style={{ backgroundColor: '#323232', margin: '10px' }}
+                  />
+                ) : (
+                  <Span width="50px"></Span>
+                )}
                 <Span
                   fontSize={CONTENT_FONT_SIZE}
                   color={ItemGradeColor[v.itemGrade]}

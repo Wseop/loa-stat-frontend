@@ -18,6 +18,7 @@ export interface ItemPrice {
 export interface TripodPrice {
   skillName: string;
   tripodName: string;
+  iconPath?: string;
   price: number;
   updated: string;
 }

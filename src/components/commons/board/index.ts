@@ -39,6 +39,8 @@ export const Row = styled.div`
     props.justifyContent ? props.justifyContent : ''};
   align-items: ${(props: RowProps) =>
     props.alignItems ? props.alignItems : ''};
+  padding-bottom: ${(props: RowProps) =>
+    props.borderColor?.bottom ? '10px' : ''};
 `;
 
 export const Col = styled.div`
